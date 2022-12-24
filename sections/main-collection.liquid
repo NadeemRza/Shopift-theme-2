@@ -1,0 +1,102 @@
+<h1 class="heading-width">{{ section.settings.heading_text }}</h1>
+<div class="flex marcus-1 main-conatiner grid">
+  {% for block in section.blocks %}
+    <div class='container'>
+      <div>
+        {% assign mobile_image = block.settings.image_mobile | default: blocks.settings.image %}
+        {% render 'image', class: '', mobileSrc: mobile_image, desktopSrc: block.settings.image %}
+      </div>
+      <div>
+        <h3>{{ block.settings.product_text }}</h3>
+        <h4>{{ block.settings.product_price }}</h4>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+{% style %}
+
+  .heading-width {
+    text-align: {{ section.settings.heading_position}}
+    ;
+    margin: 0 1rem;
+  }
+
+  .container {
+    flex-direction: column;
+  }
+  .marcus-1 {
+    margin: 0 1rem;
+  }
+  .main-conatiner {
+    row-gap: 0.2rem;
+    column-gap: 0.3rem;
+  }
+{% endstyle %}
+
+{% schema %}
+  {
+    "name": "collection",
+    "tag": "section",
+    "class": "section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading_text",
+        "label": "Collection Heading",
+        "default": "DRESSES"
+      }, {
+        "type": "select",
+        "id": "heading_position",
+        "label": "Heading position",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          }, {
+            "value": "center",
+            "label": "Center"
+          }, {
+            "value": "right",
+            "label": "Right"
+          }
+        ],
+        "default": "center"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "product-container",
+        "name": "product container",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+            "info": "1200 x 500px .jpg recommended"
+          }, {
+            "type": "image_picker",
+            "id": "image_mobile",
+            "label": "Image (Mobile)",
+            "info": "600 x 800px .jpg recommended"
+          }, {
+            "type": "text",
+            "id": "product_text",
+            "label": "Product Info",
+            "default": "Product Info"
+          }, {
+            "type": "text",
+            "id": "product_price",
+            "label": "Product Price",
+            "default": "100"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "collection"
+      }
+    ]
+  }
+{% endschema %}

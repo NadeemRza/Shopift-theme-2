@@ -1,0 +1,70 @@
+<div>
+  <div class="flex">
+    <div>
+      <h2>{{ section.settings.heading_text }}</h2>
+    </div>
+    <div>
+      <p>{{ section.settings.paragraph }}</p>
+      <a>
+        <button class="btn">
+          {{ section.settings.button_text }}
+        </button>
+      </a>
+    </div>
+  </div>
+</div>
+
+{% style %}
+  .btn {
+    background-color: {{ section.settings.button_bcg_color}}
+    ;
+    color: {{ section.settings.button_text_color}}
+    ;
+  }
+{% endstyle %}
+
+{% schema %}
+  {
+    "name": "introduction-text-section",
+    "class": "introduction-text-section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading_text",
+        "label": "Heading Text",
+        "default": "FLASH SALE NOW ON"
+      },
+      {
+        "type": "richtext",
+        "id": "paragraph",
+        "label": "Paragraph"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button Text",
+        "default": "Shop Sale"
+      },
+      {
+        "type": "color",
+        "id": "button_bcg_color",
+        "label": "Button Background Color",
+        "default": "#000"
+      }, {
+        "type": "color",
+        "id": "button_text_color",
+        "label": "Button Text Color",
+        "default": "#fff"
+      }, {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button URL"
+      }
+    ],
+    "presets": [
+      {
+        "name": "introduction-text-section"
+      }
+    ]
+  }
+{% endschema %}

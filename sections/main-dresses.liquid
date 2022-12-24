@@ -1,0 +1,162 @@
+<h2 class="heading--collection">{{ section.settings.heading_text }}</h2>
+<div class="flex container">
+  {% for block in section.blocks %}
+    <div class="container_items">
+      <div>
+        {% assign mobile_image = block.settings.image_mobile | default: blocks.settings.image %}
+        {% render 'image', class: '', mobileSrc: mobile_image, desktopSrc: block.settings.image %}
+      </div>
+      <div>
+        <h2 class="h-{{ block.id}}">{{ block.settings.dress_info }}</h2>
+        <h3 class="p-{{ block.id}}">Rs.{{ block.settings.dress_price }}</h3>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+
+{% style %}
+  .heading--collection {
+    color: {{ section.settings.heading_color}}
+    width: 90vw;
+    margin: 0 1.75rem;
+    text-align: {{ section.settings.heading_position}}
+    ;
+    color: {{ section.settings.heading_color}}
+    ;
+  }
+  {% for block in section.blocks %}
+    .h-{{ block.id}}{
+      color: {{ block.settings.dress_info_color}}
+      ;
+      font-size: {{ section.settings.item_font_size}}
+      px;
+    };
+    .p-{{ block.id}}{
+      color: {{ block.settings.dress_price_color}}
+      ;
+      font-size: {{ section.settings.item_price_font_size}}
+      px;
+    }
+  {% endfor %}
+  .container {
+    display: flex;
+    margin: 1.5rem 2rem 0;
+    column-gap: 0.5rem;
+  }
+
+  @media screen and (max-width: 750px) {
+    .container {
+      flex-direction: column;
+      gap: 1.85rem;
+    }
+  }
+{% endstyle %}
+
+{% schema %}
+  {
+    "name": "dresses_collection",
+    "tag": "section",
+    "class": "dresses_collection",
+    "max_blocks": 12,
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading_text",
+        "label": "Heading Text",
+        "default": "DRESSES"
+      },
+      {
+        "type": "color",
+        "id": "heading_color",
+        "label": "Heading Color",
+        "default": "#000"
+      },
+      {
+        "type": "select",
+        "id": "heading_position",
+        "label": "Heading position",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          }, {
+            "value": "center",
+            "label": "Center"
+          }, {
+            "value": "right",
+            "label": "Right"
+          }
+        ],
+        "default": "center"
+      },
+      {
+        "type": "range",
+        "id": "item_font_size",
+        "min": 15,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Dress Info Font size",
+        "default": 16
+      }, {
+        "type": "range",
+        "id": "item_price_font_size",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Dress Price Font size",
+        "default": 12
+      }
+    ],
+    "blocks": [
+      {
+        "type": "dress-block",
+        "name": "dress-block",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+            "info": "1200 x 500px .jpg recommended"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_mobile",
+            "label": "Image (Mobile)",
+            "info": "600 x 800px .jpg recommended"
+          },
+          {
+            "type": "text",
+            "id": "dress_info",
+            "label": "Dress Info",
+            "default": "STRAPY SLIP DRESS"
+          },
+          {
+            "type": "color",
+            "id": "dress_info_color",
+            "label": "Dress Info Color",
+            "default": "#000"
+          }, {
+            "type": "text",
+            "id": "dress_price",
+            "label": "Dress Price",
+            "default": "100"
+          }, {
+            "type": "color",
+            "id": "dress_price_color",
+            "label": "Dress Price Color",
+            "default": "#000"
+          }
+
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "dresses_collection"
+      }
+    ]
+  }
+{% endschema %}

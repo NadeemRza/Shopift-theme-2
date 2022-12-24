@@ -1,0 +1,124 @@
+<div class="container">
+  <div>
+    {% assign mobile_image = section.settings.image_mobile | default: section.settings.image %}
+    {% render 'image', class: '', mobileSrc: mobile_image, desktopSrc: section.settings.image %}
+  </div>
+  <div class="text-container">
+    <div class="text-content">
+      <h3 class="mb-15 h4 heading--1">{{ section.settings.heading_text }}</h3>
+      <h1 class="mb-15 h2 heading--2">{{ section.settings.second_heading_text }}</h1>
+      <a>
+        <button class="btn">{{ section.settings.button_text }}</button>
+      </a>
+    </div>
+  </div>
+</div>
+
+{% style %}
+  .container {
+    display: flex;
+    max-width: 90vw;
+    justify-content: center;
+    gap: 1rem;
+    height: max-content;
+    margin: 0 0 0 1.5rem;
+    felx-wrap: wrap;
+  }
+  .text-container {
+    background-color: {{ section.settings.bcg_color}}
+    ;
+    text-align: center;
+    position: relative;
+  }
+  .text-content {
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid red; */
+    padding: 50% 2.8rem;
+    text-wrap: wrap;
+  }
+  .heading--1 {
+    color: {{ section.settings.heading_color}}
+    ;
+  }
+  .heading--2 {
+    color: {{ section.settings.second_heading_text_color}}
+    ;
+  }
+  .btn {
+    background-color: {{ section.settings.button_bcg_color}}
+    ;
+    color: {{ section.settings.button_text_color}}
+    ;
+    padding: 0.8rem 2.8rem;
+    font-weight: bold;
+  }
+{% endstyle %}
+
+{% schema %}
+  {
+    "name": "image_with_text",
+    "class": "image_with_text",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image",
+        "info": "1200 x 500px .jpg recommended"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_mobile",
+        "label": "Image (Mobile)",
+        "info": "600 x 800px .jpg recommended"
+      },
+      {
+        "type": "color",
+        "id": "bcg_color",
+        "label": "Background Color",
+        "default": "#ece2cc"
+      },
+      {
+        "type": "text",
+        "id": "heading_text",
+        "label": "Heading Text",
+        "default": "MAKE A STATEMENT"
+      }, {
+        "type": "color",
+        "id": "heading_color",
+        "label": "Heading Color",
+        "default": "#261d09"
+      }, {
+        "type": "text",
+        "id": "second_heading_text",
+        "label": "Second Heading Text",
+        "default": "SHOP OUR NEW UTILITARIAN STYLE"
+      }, {
+        "type": "color",
+        "id": "second_heading_text_color",
+        "label": "Second Heading Color",
+        "default": "#261d09"
+      }, {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button Text",
+        "default": "SHOP NOW"
+      }, {
+        "type": "color",
+        "id": "button_bcg_color",
+        "label": "Button Background Color",
+        "default": "#261d09"
+      }, {
+        "type": "color",
+        "id": "button_text_color",
+        "label": "Button Text Color",
+        "default": "#fff"
+      }
+    ],
+    "presets": [
+      {
+        "name": "image_with_text"
+      }
+    ]
+  }
+{% endschema %}

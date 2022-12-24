@@ -1,0 +1,211 @@
+<h1 class="block--heading">{{ section.settings.heading_text_1 }}</h1>
+<h1 class="block--heading">{{ section.settings.heading_text_2 }}</h1>
+<div class="block-container grid--3-col-desktop">
+  {% for block in section.blocks %}
+    <div class="summer_shop_container">
+      <div>
+        {% assign mobile_image = block.settings.image_mobile | default: block.settings.image %}
+        {% render 'image', class: 'media media--square gap-mobile', mobileSrc: mobile_image, desktopSrc: block.settings.image %}
+      </div>
+      <div class="summer_shop_items {{section.settings.text_alignment}}">
+        <div class="block-width flex cloumn {{section.settings.content_position}}">
+          <h2 class="info-text">{{ block.settings.info_text }}</h2>
+          <a>
+            <button class="button button--primary">{{ block.settings.button_text }}</button>
+          </a>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+{% style %}
+  .block-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .summer_shop_container {
+    position: relative;
+  }
+  .summer_shop_items {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .block-width {
+    height: 31rem;
+  }
+  .block--heading {
+    color: {{ section.settings.block_heading_text_color}}
+    ;
+    font-size: {{ section.settings.block_heading_font_size}}
+    px;
+    width: 100%;
+    text-align: {{ section.settings.heading_text_alignment}}
+    ;
+  }
+  .info-text {
+    color: {{ section.blocks.settings.info_text_color}}
+  }
+
+  @media screen and (max-width: 989px) {
+    .block-container {
+      max-width: 95%;
+      grid-template-columns: 1fr;
+      margin: auto;
+    }
+    .gap-mobile {
+      margin: 0.2rem 0;
+    }
+  }
+{% endstyle %}
+
+
+{% schema %}
+  {
+    "name": "summer_shop",
+    "class": "summer_shop",
+    "tag": "section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading_text_1",
+        "label": "Heading Text 1",
+        "default": "SPRING/SUMMER."
+      },
+      {
+        "type": "text",
+        "id": "heading_text_2",
+        "label": "Heading Text 2",
+        "default": "SHOP THE NEW SEASON NOW"
+      },
+      {
+        "type": "select",
+        "id": "heading_text_alignment",
+        "label": "Heading Text alignment",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          }, {
+            "value": "center",
+            "label": "Center"
+          }, {
+            "value": "right",
+            "label": "Right"
+          }
+        ],
+        "default": "center"
+      },
+      {
+        "type": "color",
+        "id": "block_heading_text_color",
+        "label": "Heading Color",
+        "default": "#000"
+      }, {
+        "type": "range",
+        "id": "block_heading_font_size",
+        "min": 20,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Font Size",
+        "default": 35
+      }, {
+        "type": "select",
+        "id": "content_position",
+        "label": "Content position",
+        "options": [
+          {
+            "value": "align-start justify-start",
+            "label": "Top left"
+          },
+          {
+            "value": "align-center justify-start",
+            "label": "Top center"
+          },
+          {
+            "value": "align-end justify-start",
+            "label": "Top right"
+          },
+          {
+            "value": "align-start justify-center",
+            "label": "Middle left"
+          }, {
+            "value": "align-center justify-center",
+            "label": "Middle center"
+          }, {
+            "value": "align-end justify-center",
+            "label": "Middle right"
+          }, {
+            "value": "align-start justify-end",
+            "label": "Bottom left"
+          }, {
+            "value": "align-center justify-end",
+            "label": "Bottom center"
+          }, {
+            "value": "align-end justify-end",
+            "label": "Bottom right"
+          }
+        ],
+        "default": "align-start justify-start"
+      }
+    ],
+    "blocks": [
+      {
+        "name": "summer_shop_blocks",
+        "type": "summer_shop_blocks",
+        "limit": 6,
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+            "info": "1200 x 500px .jpg recommended"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_mobile",
+            "label": "Image (Mobile)",
+            "info": "600 x 800px .jpg recommended"
+          },
+          {
+            "type": "text",
+            "id": "info_text",
+            "label": "Info Text",
+            "default": "BOTTOMS"
+          },
+          {
+            "type": "color",
+            "id": "info_text_color",
+            "label": "Info Text Color",
+            "default": "#fff"
+          }, {
+            "type": "text",
+            "id": "button_text",
+            "label": "Button Text",
+            "default": "SHOP NOW"
+          }, {
+            "type": "color",
+            "id": "button_bcg_color",
+            "label": "Button Background Color",
+            "default": "#000"
+          }, {
+            "type": "color",
+            "id": "button_text_color",
+            "label": "Button Text Color",
+            "default": "#fff"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+
+        "name": "summer_shop"
+      }
+    ]
+  }
+{% endschema %}
