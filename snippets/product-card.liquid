@@ -7,5 +7,16 @@
       {{ product.compare_at_price | money }}
     {% endif %}
   </div>
-
+  <div>
+    {% unless product.has_only_default_variant %}
+    {% for option in product.options_with_values %}
+      <label>{{option.name}}</label>
+      {{for value in option.values}}
+        {{value}}
+      {{% endfor %}}
+    {% endfor %}
+  </div>
+  <div>
+    <button class="btn--custom">Add To Cart</button>
+  </div>
 </div>

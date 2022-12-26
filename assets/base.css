@@ -659,3 +659,28 @@ section + section {
   font-size: 2rem;
   margin-top: 0.5rem;
 }
+
+
+/***********************Featured Collection Section******************/
+.featured-collection{
+  margin-bottom: 500px;
+}
+
+/* .featured-collection__card{
+  margin: 0 0.75rem;
+} */
+
+.featured-collection__content{
+  margin-top: 1rem;
+  /* background-color: #f1ecec; */
+}
+
+
+/*******************Block Section************************/
+a {
+  text-decoration: none;
+}
+
+.mt-1 {
+  margin-top: 1rem;
+}
