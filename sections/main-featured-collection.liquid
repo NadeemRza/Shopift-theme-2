@@ -1,5 +1,5 @@
 {% if section.settings.collection_id != blank %}
-  <div class="page-width featured-collection">
+  <div class="page-width card-flex featured-collection">
     <div class="featured-collection__heading h2 heading1">Best Selling Dresses</div>
     <div class="grid grid--1-col grid--4-col-desktop" style="gap: 10px;">
       {% assign product_limit = section.settings.product_limit %}
@@ -21,6 +21,16 @@
     text-align: {{ section.settings.heading_position}}
     ;
   }
+
+  .featured-collection__card {
+    max-width: 25%;
+  }
+
+  @media only screen and (max-width: 749px) {
+    .featured-collection__card {
+      padding: 10rem 0;
+    }
+  }
 {% endstyle %}
 
 
@@ -28,6 +38,7 @@
   {
     "name": "Featured-Collection",
     "class": "Featured-Collection",
+    "tag": "section",
     "settings": [
       {
         "type": "collection",

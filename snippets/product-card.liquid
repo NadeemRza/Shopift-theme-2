@@ -2,21 +2,26 @@
   {% render 'image', class: 'pimg', mobileSrc: {{product.featured_image}}, desktopSrc: {{product.featured_image}} %}
   <div>
     <h2 class="heading2">{{ product.title }}</h2>
-    <h4>{{ product.price | money }}</h4>
+    <p class="mt-1"><span>5 Star</span> <span style="opacity: 0.8;">54 reviews</span> </p>
+    <h6 class="mt-1">MRP: {{ product.price | money }}
     {% if product.compare_at_price > product.price %}
-      {{ product.compare_at_price | money }}
+      <s>{{ product.compare_at_price_max | money }}</s>
     {% endif %}
+    </h6>
   </div>
   <div>
     {% unless product.has_only_default_variant %}
     {% for option in product.options_with_values %}
-      <label>{{option.name}}</label>
-      {{for value in option.values}}
+      <label class="mt-1">{{option.name}}</label>
+      <select>
+      {% for value in option.values %}
+        <option value="{{value}}">{{value}}</option>
         {{value}}
-      {{% endfor %}}
+      {% endfor %}
+      </select>
     {% endfor %}
-  </div>
+  {% endunless %}
   <div>
-    <button class="btn--custom">Add To Cart</button>
+    <button class="button button--primary mt-1">Add To Cart</button>
   </div>
 </div>
