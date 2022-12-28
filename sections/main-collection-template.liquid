@@ -6,7 +6,7 @@
   <div class="page-width main-collection">
     <div class="main-collection__container" id="ProductGridContainer">
       {%- if collection.products.size == 0 -%}
-        <div class="main-collection__empty">
+        <div class="main-collection__empty" id="product-main_color">
           No products found
         </div>
       {%- else -%}
@@ -14,13 +14,13 @@
           class="main-collection__filters"
           id="CollectionFilters"
           data-id="{{ section.id }}">
-          <div class="collection-filters__overlay"></div>
+          <div class="collection-filters__overlay" id="product-main_color"></div>
           {% render 'collection-filter', section: section, collection: collection %}
         </aside>
 
         <div class="main-collection__products">
           <div class="collection-toolbar">
-            <div class="collection-toolbar__count">
+            <div class="collection-toolbar__count" id="product-main_color">
               Showing {{ collection.products_count }} of {{ collection.all_products_count }} {{ collection.all_products_count | pluralize: 'product', 'products' }}
             </div>
           </div>
