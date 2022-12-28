@@ -1,0 +1,138 @@
+{% for block in section.blocks %}
+  <div class="main-container" data-flickity='{ "cellAlign": "left", "contain": true }'>
+    <div class="container">
+      <div>
+        {% assign mobile_image = block.settings.image_mobile | default: block.settings.image %}
+        {% render 'image', class: '', mobileSrc: mobile_image, desktopSrc: block.settings.image %}
+      </div>
+      <div class="text-container">
+        <div class="text-content">
+          <h3 class="mb-15 h4 heading--1--{{block.id}}">{{ block.settings.heading_text }} {{ forloop.index }}</h3>
+          <h1 class="mb-15 h2 heading--2--{{block.id}}">{{ block.settings.sub_heading_text }}</h1>
+          <a>
+            <button class="btn--{{block.id}}">{{ block.settings.button_text }}</button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+
+{% style %}
+  .container {
+    display: flex;
+    max-width: 90vw;
+    justify-content: center;
+    gap: 1rem;
+    height: max-content;
+    margin: 0 0 0 1.5rem;
+    felx-wrap: wrap;
+  }
+
+  .text-content {
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid red; */
+    padding: 50% 2.8rem;
+    text-wrap: wrap;
+  }
+
+  {% for block in section.blocks %}
+    .text-container {
+      background-color: {{ block.settings.bcg_color}}
+      ;
+      text-align: center;
+      position: relative;
+    }
+    .heading--1--{{ block.id}}{
+      color: {{ block.settings.heading_color}}
+      ;
+    }
+    .heading--2--{{ block.id}}{
+      color: {{ block.settings.sub_heading_text_color}}
+      ;
+    }
+    .btn--{{ block.id}}{
+      background-color: {{ block.settings.button_bcg_color}}
+      ;
+      color: {{ block.settings.button_text_color}}
+      ;
+      padding: 0.8rem 2.8rem;
+      font-weight: bold;
+    }
+  {% endfor %}
+{% endstyle %}
+
+{% schema %}
+  {
+    "name": "Image With Text Modified",
+    "class": "image_with_text",
+    "blocks": [
+      {
+        "name": "Image Text Block",
+        "type": "image_with_text",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+            "info": "1200 x 500px .jpg recommended"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_mobile",
+            "label": "Image (Mobile)",
+            "info": "600 x 800px .jpg recommended"
+          },
+          {
+            "type": "color",
+            "id": "bcg_color",
+            "label": "Background Color",
+            "default": "#ecf1f5"
+          },
+          {
+            "type": "text",
+            "id": "heading_text",
+            "label": "Heading Text",
+            "default": "Look"
+          }, {
+            "type": "color",
+            "id": "heading_color",
+            "label": "Heading Color",
+            "default": "#271e0a"
+          }, {
+            "type": "text",
+            "id": "sub_heading_text",
+            "label": "Second Heading Text",
+            "default": "SHOP OUR NEW UTILITARIAN STYLE"
+          }, {
+            "type": "color",
+            "id": "sub_heading_text_color",
+            "label": "Second Heading Color",
+            "default": "#271e0a"
+          }, {
+            "type": "text",
+            "id": "button_text",
+            "label": "Button Text",
+            "default": "SHOP NOW"
+          }, {
+            "type": "color",
+            "id": "button_bcg_color",
+            "label": "Button Background Color",
+            "default": "#271e0a"
+          }, {
+            "type": "color",
+            "id": "button_text_color",
+            "label": "Button Text Color",
+            "default": "#fff"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Image With Text Modified"
+      }
+    ]
+  }
+{% endschema %}

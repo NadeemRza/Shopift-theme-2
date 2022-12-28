@@ -31,23 +31,22 @@
       {% endform %}
     </div>
     <div>
-      <h3>{{ section.settings.column3_heading_text }}</h3>
       {% for block in section.blocks %}
-        {% case block.type %}
-        {% when 'list_blocks' %}
+        <h3>{{ section.settings.column3_heading_text }}</h3>
+        {% if block.type == 'list_blocks' %}
           <ul>
-            <li class="mt-1">{{ block.type.list_blocks.list_text }}</li>
+            <li>{{ block.settings.list_text }}</li>
           </ul>
-        </div>
-        <div>
+        {% endif %}
+      </div>
+      <div>
+        {% if block.type == 'logo_blocks' %}
           <h3>Social Media</h3>
-          {% when 'logo_blocks' %}
-          <div class="mt-1">
+          <div>
             {% assign mobile_image = block.settings.logo_mobile | default: block.settings.logo_image %}
             {% render 'image', class: '', mobileSrc: mobile_image, desktopSrc: block.settings.logo_image %}
           </div>
-        </div>
-        {% endcase %}
+        {% endif %}
       {% endfor %}
     </div>
   </div>
@@ -59,13 +58,12 @@
 </div>
 
 {% style %}
-
   .footer {
     display: flex;
     flex-direction: Column;
     margin: 0 auto;
     padding: 1.75rem 0;
-    background-color: {{ section.settings.background_color}};
+    background-color: {{ section.settings.background_color}}
     ;
   }
 
@@ -95,7 +93,7 @@
   .footer__input {
     outline: none;
     border: 1px solid #fff;
-    background-color: {{ section.settings.background_color}};
+    background-color: {{ section.settings.background_color}}
     ;
   }
 
