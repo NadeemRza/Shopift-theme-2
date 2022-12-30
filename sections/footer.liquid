@@ -31,29 +31,46 @@
       {% endform %}
     </div>
     <div>
-      {% for block in section.blocks %}
-        <h3>{{ section.settings.column3_heading_text }}</h3>
-        {% if block.type == 'list_blocks' %}
-          <ul>
-            <li>{{ block.settings.list_text }}</li>
-          </ul>
-        {% endif %}
-      </div>
+      <h3>{{ section.settings.column3_heading_text }}</h3>
       <div>
-        {% if block.type == 'logo_blocks' %}
-          <h3>Social Media</h3>
-          <div>
-            {% assign mobile_image = block.settings.logo_mobile | default: block.settings.logo_image %}
-            {% render 'image', class: '', mobileSrc: mobile_image, desktopSrc: block.settings.logo_image %}
-          </div>
-        {% endif %}
-      {% endfor %}
+        {% for block in section.blocks %}
+          {% if block.type == 'list_blocks' %}
+            <ul class="flex column">
+              <li>{{ block.settings.list_text }}</li>
+            </ul>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+    <div>
+      <h3>Social Media</h3>
+      <div class="flex footer__content__logo_blocks">
+        {% for block in section.blocks %}
+          {% if block.type == 'logo_blocks' %}
+            <div class="footer__content__logo_blocks-img">
+              {% assign mobile_image = block.settings.logo_mobile | default: block.settings.logo_image %}
+              {% render 'image', class: '', mobileSrc: mobile_image, desktopSrc: block.settings.logo_image %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
     </div>
   </div>
   <div class="footer__text">
-    <span>&copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: '/' }}</span>
-    <span>
-      -- {{ powered_by_link }}</span>
+    <div class="center">
+      <span>&copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: '/' }}</span>
+      <span>
+        -- {{ powered_by_link }}</span>
+    </div>
+    <div class="footer_payment-modes">
+      <ul class="list list-payment flex align-center" role="list">
+        {%- for type in shop.enabled_payment_types -%}
+          <li class="list-payment__item">
+            {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
   </div>
 </div>
 
@@ -75,14 +92,16 @@
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    padding: 0 0 0 1.5rem;
+    padding: 0 1.5rem;
     /* column-gap: 0.5rem; */
   }
 
   .footer__text {
     width: 100%;
-    text-align: center;
-    margin-top: 2.5rem;
+    margin-top: 4.5rem;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 2rem;
   }
 
   .fa-arrow-right {
@@ -99,6 +118,13 @@
 
   .fw-bold {
     font-weight: bold;
+  }
+
+  .footer__content__logo_blocks-img {
+    margin: 0 0.2rem;
+    border: 1px solid red;
+    object-fit: contain;
+    border-radius: 50%;
   }
 {% endstyle %}
 
